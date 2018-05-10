@@ -1,6 +1,6 @@
 package ar.com.eduit.curso.java.clase02;
 
-public class Empleado {
+public class Empleado  {
     private int legajo;
     private String nombre;
     private String apellido;
@@ -13,6 +13,7 @@ public class Empleado {
         this.basico = basico;
     }
 
+   
     @Override
     public String toString() {
         return "Empleado{" + "legajo=" + legajo + ", nombre=" + nombre + ", apellido=" + apellido + ", basico=" + basico + '}';
