@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="363.0" prefWidth="417.0" stylesheets="@style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="clase04.FXMLDocumentController">
+   <children>
+      <Label layoutX="23.0" layoutY="19.0" text="Nombre" />
+      <TextField fx:id="txtNombre" layoutX="92.0" layoutY="15.0" prefHeight="25.0" prefWidth="206.0" promptText="Ingrese su nombre" />
+      <Button layoutX="316.0" layoutY="15.0" mnemonicParsing="false" onAction="#aceptar" prefHeight="25.0" prefWidth="80.0" text="Aceptar" />
+      <CheckBox fx:id="chkBici" layoutX="23.0" layoutY="59.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="80.0" text="Bicicleta" />
+      <CheckBox fx:id="chkMoto" layoutX="23.0" layoutY="84.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="80.0" text="Moto" />
+      <CheckBox fx:id="chkAuto" layoutX="23.0" layoutY="110.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="80.0" text="Auto" />
+      <Button layoutX="316.0" layoutY="105.0" mnemonicParsing="false" onAction="#agregar" prefHeight="27.0" prefWidth="80.0" text="Agregar" />
+      <TextArea fx:id="txaTexto" editable="false" layoutX="23.0" layoutY="144.0" prefHeight="200.0" prefWidth="372.0" />
+   </children>
+</AnchorPane>
