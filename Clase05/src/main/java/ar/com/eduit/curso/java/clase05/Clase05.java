@@ -155,6 +155,28 @@ public class Clase05 {
         System.out.println("Hola");
         System.err.println("Ocurrio un error.");
         
+        // .exit() cierra el programa
+        //System.exit(0); //0 no hubo error, 1 error, -1 warning 
+        //System.out.println("Esta linea no se ejecuta.");
+        
+        // .getProperties();
+        // Devuelve un diccionario de propiedades del sistema
+        System.out.println(System.getProperties());
+        System.out.println("-----------------------------");
+        System.getProperties().forEach((k,v)-> System.out.println(k+": "+v));
+        System.out.println("-----------------------------");
+        System.getenv().forEach((k,v)->System.out.println(k+": "+v));
+        System.out.println("-----------------------------");
+        
+        // .getProperty()
+        // Devuelve una propiedad en particular
+        System.out.println(System.getProperty("os.name"));
+        System.out.println(System.getProperty("user.name"));
+        System.out.println(System.getProperty("java.version"));
+        System.out.println(System.getenv("NUMBER_OF_PROCESORS"));
+        
+        
+        
     }   
     
     
