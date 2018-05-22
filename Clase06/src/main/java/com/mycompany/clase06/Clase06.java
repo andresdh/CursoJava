@@ -9,6 +9,8 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Clase06 {
     public static void main(String[] args) {
@@ -117,6 +119,51 @@ public class Clase06 {
             System.out.println(colaAutos.poll());
         }
         System.out.println(colaAutos.size());
-               
+        
+        //uso de Exception
+        // Estructura try/catch/finally
+        /* try{
+            System.out.println(10/0);
+            System.out.println("Esta linea no se ejecuta");
+        }catch(Exception e){
+            System.out.println("Ocurrio un error!");
+            System.out.println(e);
+        }finally{//opcional y se ejecuta SIEMPRE
+            System.out.println("El programa termina normalmente");
+        }
+        */
+        // continua ejecucion normal.
+        
+        
+        try{
+            GeneradorException.generar("hola",20);
+        }catch (IndexOutOfBoundsException e) {
+            System.out.println("Indice fuera de rango");
+        }catch (ArithmeticException e) {
+            System.out.println("Divisiòn /0");
+        }catch (NumberFormatException e){
+            System.out.println("Formato de numero incorrecto.");
+        }catch (NullPointerException e){
+            System.out.println("Valor nulo");
+        }catch(Exception e){
+            System.out.println("Ocurrio un error no esperado.");
+        }
+        
+        //Manejo de excepciones para validar reglas de negocio
+        Vuelo v1=new Vuelo("aer1234",100);
+        Vuelo v2=new Vuelo("lat111",100);
+        System.out.println("------------------------------------");
+        try {
+            v1.venderPasajes(30);
+            v2.venderPasajes(20);
+            v1.venderPasajes(50);
+            v2.venderPasajes(10);
+            v1.venderPasajes(40); //lanza una exception
+            v2.venderPasajes(10); //esta venta no se hace
+        } catch (NoHayMasPasajesException ex) {
+            System.out.println(ex);
+        }
+
+        
     }
 }
