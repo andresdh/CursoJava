@@ -1,5 +1,6 @@
 package ar.com.eduit.curso.java.archivos;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -9,6 +10,7 @@ public interface I_Archivo {
     void setText(String text);
     void appendText(String text);
     void addLine(String line);
+    void addLines(Collection<String>lineas);
     /**
      * Devuelve un List de lineas con duplicados 
      */

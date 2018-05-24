@@ -24,9 +24,15 @@ public class TestArchivo {
         archivo.addLine("Viernes");
         archivo.addLine("Sabado");
         archivo.addLine("Domingo");
+        archivo.addLine("Lunes");
+        archivo.addLine("Verano.");
         
         
-        System.out.println(archivo.getText());
         
+        //System.out.println(archivo.getLines());
+        //archivo.getLines().forEach(System.out::println);
+        //System.out.println(archivo.getText());
+        //archivo.getLinkedHashLies().forEach(System.out::println);
+        archivo.getTreeLines().forEach(System.out::println);
     }
 }

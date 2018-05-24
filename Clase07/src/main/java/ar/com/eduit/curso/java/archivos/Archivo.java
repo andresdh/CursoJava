@@ -1,11 +1,16 @@
 package ar.com.eduit.curso.java.archivos;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Archivo implements I_Archivo {
     private File file; // objeto file importado del paquete io.file
@@ -87,22 +92,50 @@ public class Archivo implements I_Archivo {
 
     @Override
     public List<String> getLines() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String linea;
+        List<String>lista=new ArrayList();
+        try(BufferedReader in=new BufferedReader(new FileReader(file));) {
+           // lista.addAll((List<String>)in.lines()); //con Java 8
+           while((linea=in.readLine())!=null){
+               lista.add(linea);
+           }
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return lista;
     }
 
     @Override
     public Set<String> getLinkedHashLies() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<String> set = new LinkedHashSet();
+        set.addAll(getLines());
+        return set;
     }
 
     @Override
     public Set<String> getTreeLines() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<String> set = new TreeSet();
+        set.addAll(getLines());
+        return set;
     }
 
     @Override
     public void removeLine(String line) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<String>lista=getLines();
+        lista.remove(line);
+        addLines(lista);
+    }
+
+    @Override
+    public void addLines(Collection<String> lineas) {
+        try(BufferedWriter out=new BufferedWriter(new FileWriter(file));) {
+            for(String st::lineas) out.write(st+"\n");
+            
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
     
 }

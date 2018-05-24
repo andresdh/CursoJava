@@ -10,3 +10,5 @@ Jueves
 Viernes
 Sabado
 Domingo
+Lunes
+Verano.
