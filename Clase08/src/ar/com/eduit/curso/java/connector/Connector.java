@@ -1,5 +1,8 @@
 package ar.com.eduit.curso.java.connector;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 public class Connector {
     //driver version 5
     private static String driver ="com.mysql.jdbc.Driver";
@@ -11,7 +14,26 @@ public class Connector {
     private static String port="3306";
     private static String db="colegio";
     private static String params="";
+    //private static String params="?serverTimezone=UTC";// para driver mysql6 o superior
     private static String user="root";
     private static String pass="";
+    
+    private static String url="jdbc:"+vendor+"://"+server+":"+port+"/"+db+params;
+    private static Connection conn=null; // importar java.sql.Connection porque asi lo puedo implementar en otros tipos de DB
+    private Connector(){ } //con este constructor privado me aseguro de que nadie pueda crear un "new" Connector
+    
+    public static Connection getConnection(){
+        if(conn==null){
+            try {
+                Class.forName(driver);
+                conn=DriverManager.getConnection(url, user, pass);
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return conn;
+    }
+    
     
 }
