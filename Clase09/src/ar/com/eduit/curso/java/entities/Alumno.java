@@ -30,6 +30,17 @@ public class Alumno {
         return "Alumno{" + "idAlumno=" + idAlumno + ", nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + ", idCurso=" + idCurso + '}';
     }
 
+    public String getTable(){
+        return "alumnos";
+    }
+    
+     public int getId() {
+        return idAlumno;
+    }
+
+    public void setId(int idAlumno) {
+        this.idAlumno = idAlumno;
+    }
     public int getIdAlumno() {
         return idAlumno;
     }

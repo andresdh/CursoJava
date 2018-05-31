@@ -30,6 +30,17 @@ public class Curso {
         return "Curso{" + "idCurso=" + idCurso + ", titulo=" + titulo + ", profesor=" + profesor + ", dia=" + dia + ", turno=" + turno + '}';
     }
 
+    public String getTable(){
+        return "cursos";
+    }
+    
+    public int getId() {
+        return idCurso;
+    }
+
+    public void setId(int idCurso) {
+        this.idCurso = idCurso;
+    }
     public int getIdCurso() {
         return idCurso;
     }
