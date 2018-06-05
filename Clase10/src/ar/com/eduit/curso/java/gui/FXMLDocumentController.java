@@ -4,14 +4,21 @@ import ar.com.eduit.curso.java.connector.Connector;
 import ar.com.eduit.curso.java.dao.repositorios.AlumnoR;
 import ar.com.eduit.curso.java.dao.repositorios.CursoR;
 import ar.com.eduit.curso.java.entities.Alumno;
+import ar.com.eduit.curso.java.entities.Curso;
+import ar.com.eduit.curso.java.util.fx.FxTable;
 import ar.com.eduit.curso.java.util.validaciones.Validator;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 
 public class FXMLDocumentController implements Initializable {
     private AlumnoR ar;
@@ -22,15 +29,30 @@ public class FXMLDocumentController implements Initializable {
     private TextField txtApellido;
     @FXML
     private TextField txtEdad;
-    @FXML
-    private TextField txtCurso;
+
     @FXML
     private Label lblInfoAlumno;
+    @FXML
+    private ComboBox<Curso> cmbCursos;
+    @FXML
+    private TableView<Alumno> tblAlumnos;
+    @FXML
+    private TextField txtBuscarApe;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ar= new AlumnoR(Connector.getConnection());
         cr= new CursoR(Connector.getConnection());
+        cargar();
+    }    
+
+    private void cargar() {
+        //cargar cmbCursos
+        cmbCursos.getItems().addAll(cr.getAll());
+        cmbCursos.getSelectionModel().selectFirst();
+        
+        //cargar tblAlumnos
+        new FxTable().cargar(ar.getAll(), tblAlumnos);
     }    
     @FXML
     private void agregarAlumno(ActionEvent event) {
@@ -39,11 +61,12 @@ public class FXMLDocumentController implements Initializable {
                 txtNombre.getText(),
                 txtApellido.getText(),
                 Integer.parseInt(txtEdad.getText()),
-                Integer.parseInt(txtCurso.getText())
+                cmbCursos.getSelectionModel().getSelectedItem().getId()
             );
             ar.save(alumno);
             lblInfoAlumno.setText("Se dio de alta un alumno id: "+alumno.getId());
             limpiarAlumno();
+            cargar();
         }
     }
     private boolean validarAlumno(){
@@ -60,5 +83,23 @@ public class FXMLDocumentController implements Initializable {
         txtApellido.setText("");
         txtEdad.setText("");
         txtNombre.requestFocus();
+        cmbCursos.getSelectionModel().selectFirst();
+    }
+    @FXML
+    private void buscarApe(KeyEvent evt){
+        new FxTable().cargar(ar.getLikeApellido(txtBuscarApe.getText()), tblAlumnos);
+    }
+    @FXML
+    private void borrarAlumno(ActionEvent evt){
+        Alumno alumno=tblAlumnos.getSelectionModel().getSelectedItem();
+        if(alumno==null) return;
+        Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Borrar Alumno");
+        alert.setContentText("Desea borrar al alumno id "+alumno.getId()+"?");
+        if(alert.showAndWait().get().equals(ButtonType.OK)){
+            ar.remove(alumno);
+            lblInfoAlumno.setText("Se borro un alumno.");
+        }
+        cargar();    
     }
 }

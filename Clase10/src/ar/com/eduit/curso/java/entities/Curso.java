@@ -27,7 +27,7 @@ public class Curso {
 
     @Override
     public String toString() {
-        return "Curso{" + "idCurso=" + idCurso + ", titulo=" + titulo + ", profesor=" + profesor + ", dia=" + dia + ", turno=" + turno + '}';
+        return idCurso + ", " + titulo + ", " + profesor + ", " + dia + ", " + turno;
     }
 
     public String getTable(){
